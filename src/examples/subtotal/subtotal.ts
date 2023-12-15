@@ -6,6 +6,7 @@ import { handleErrors, formatType } from '../common/utils'
 declare var require: any
 const themeClassic = require('subtotal-multiple-aggregates/dist/looker-classic.css')
 const themeWhite = require('subtotal-multiple-aggregates/dist/looker-white.css')
+const themeCustom = require('./looker-custom.css')
 
 import { Looker, VisualizationDefinition, LookerChartUtils, Cell } from '../types/types'
 
@@ -34,10 +35,23 @@ const vis: Subtotal = {
       display: 'select',
       values: [
         { 'Classic': 'classic' },
-        { 'White': 'white' }
+        { 'White': 'white' },
+        {'Custom': 'custom'}
       ],
-      default: 'classic'
+      default: 'custom'
     },
+  //   custom_background_color: {
+  //     type: 'string',
+  //     label: 'Custom Background Color',
+  //     display: 'color',
+  //     default: '#ffffff' // Color por defecto, puede ser cualquier color válido
+  // },
+  // custom_text_color: {
+  //   type: 'string',
+  //   label: 'Custom Text Color',
+  //   display: 'color',
+  //   default: '#000000' 
+  // },
     show_full_field_name: {
       type: 'boolean',
       label: 'Show Full Field Name',
@@ -68,6 +82,15 @@ const vis: Subtotal = {
         break
       case 'white':
         this.style.innerHTML = themeWhite.toString()
+        break
+        case 'custom':
+          this.style.innerHTML = themeCustom.toString()
+          // this.style.innerHTML = `
+          //   /* Estilos personalizados */
+          //   table {
+          //     background-color: ${config.custom_background_color};
+          //     color: ${config.custom_text_color};
+          //   }`;
         break
       default:
         throw new Error(`Unknown theme: ${theme}`)
